@@ -1,4 +1,5 @@
-from datasets import load_dataset, concatenate_datasets
+import pickle
+import os
 import regex as re
 
 #moved dataset to txt file
@@ -65,7 +66,23 @@ class RegexTokenizer():
         
             if verbose:
                 print(f"merge {i+1}/{num_merges}: {top_pair} -> {idx} ({self.vocab[idx]}) had {stats[top_pair]} occurrences")
+            
+        return self
     
+    @property
+    def vocab_size(self):
+        return len(self.vocab)
+
+    def save(self, path):
+        with open(path, 'wb') as f:
+            pickle.dump(self.merges, f)
+
+    def load(self, path):
+        with open(path, 'rb') as f:
+            self.merges = pickle.load(f)
+        for (p0, p1), idx in self.merges.items():
+            self.vocab[idx] = self.vocab[p0] + self.vocab[p1]
+
     def decode(self, ids):
         cat =[]
 
