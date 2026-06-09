@@ -46,7 +46,6 @@ A decoder-only transformer following the nanoGPT structure:
 
 After training, the model generates coherent TinyStories-style prose — simple sentences, recurring child characters, and basic narrative structure — with the local incoherence you'd expect from a ~12M-parameter model at this scale. A full 500-token sample is saved in [`output.md`](output.md).
 
-> **Train/val loss:** _add your final reported values here_ — the training loop prints them every 500 steps; capturing them gives the repo a concrete quantitative result alongside the qualitative sample.
 
 ## Setup
 
